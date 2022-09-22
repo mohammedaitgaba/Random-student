@@ -4,28 +4,50 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <title>Document</title>
 </head>
 <body>
-    <label for="">Student Name</label>
-    <input type="text" id="student_name">
-    <button id="add" onclick="addStudents()">New student</button>
+    <section class="container">
+        <!-- <button onclick="tored()">to red</button> -->
+        <section>
+            <div>
+                <h2>students list</h2>
+            </div>
+            <div class="stud_list">
+                <span id="students_list" >
+                    
+                </span>
+            </div>
+        </section>
+
+        <section class="generator">
+            <div>
+                <button onclick="generateStudentsList()">generate list</button>
+            </div>
+
+            <div class="add_new_student">
+                <label for="">Student Name</label>
+                <input type="text" id="student_name">
+                <button id="add" onclick="addStudents()">New student</button>
+            </div>
+
+
+
+            <div class="pick_lucky_student">
+                <button id="Random_student" onclick="pickStudent()">Go</button>
+            </div>
+        
+        </section>
     
-    <button id="Random_student" onclick="pickStudent()">Go</button>
-
-    <section >
-        <div>
-            <h2>students list</h2>
-        </div>
-        <div id="students_list">
-            
-        </div>
-    </section>
-
-    <section id="picked_students">
-        <div>
-            <h2>picked students by order</h2>
-        </div>
+        <section >
+            <div>
+                <h2>picked students by order</h2>
+            </div>
+            <div id="picked_students">
+    
+            </div>
+        </section>
     </section>
 
     <script src="script.js"> </script>
