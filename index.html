@@ -5,14 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
     <title>Document</title>
 </head>
 <body>
-    <section class="container">
+    <section class="title">
+        Welcom to student picker
+    </section>
+    <section class="container_student_picker">
         <!-- <button onclick="tored()">to red</button> -->
-        <section>
-            <div>
-                <h2>students list</h2>
+        <section class="students_list_section">
+            <div class="students_list_title">
+                <h3>students list</h2>
             </div>
             <div class="stud_list">
                 <span id="students_list" >
@@ -22,17 +28,17 @@
         </section>
 
         <section class="generator">
-            <div>
-                <button onclick="generateStudentsList()">generate list</button>
+            <div class="generate_list_student">
+                <button onclick="generateStudentsList()">generate ready list</button>
             </div>
 
-            <div class="add_new_student">
-                <label for="">Student Name</label>
-                <input type="text" id="student_name">
+            <form class="form-floating mb-3 new_student">
+                <!-- <label for="">Student Name</label> -->
+                <!-- <input type="text" id="student_name"> -->
+                <input type="text" class="form-control" id="student_name" placeholder="name@example.com">
+                <label for="student_name">Student Name</label>
                 <button id="add" onclick="addStudents()">New student</button>
-            </div>
-
-
+            </form> 
 
             <div class="pick_lucky_student">
                 <button id="Random_student" onclick="pickStudent()">Go</button>
@@ -40,9 +46,9 @@
         
         </section>
     
-        <section >
+        <section class="list_picked_students">
             <div>
-                <h2>picked students by order</h2>
+                <h3>picked students</h2>
             </div>
             <div id="picked_students">
     

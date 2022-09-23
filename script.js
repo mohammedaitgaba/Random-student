@@ -6,7 +6,12 @@ let students_table=[];
 let generated_list ;
 let students_ordered = [];
 let d= new Date();
+
+
 let nextDay = d.getDate()
+let nexMonth = d.getMonth()
+let nextYear =d.getFullYear()
+
 let dayPositionInTheWeek = d.getDay()
 fetch("./students.json")
 .then(response =>response.json())
@@ -36,7 +41,9 @@ function generateStudentsList(){
         students_field.innerHTML += iterator.name +"</br>" +'<hr>' ;
     }
 }
-
+document.getElementById("add").addEventListener("click", function(event){
+    event.preventDefault()
+  });
 function addStudents(){
     this.generateDateOfSubject()
     // getting input value (student name)
@@ -94,7 +101,7 @@ function pickStudent(){
         
         this.addStudents()
         this.defaultview()
-    }, 00);
+    }, 1000);
 
 }
 
@@ -106,8 +113,8 @@ function defaultview(){
 }
 
 function GetDateOfSubject(){
-
     nextDay++
+    
    if (dayPositionInTheWeek < 7) {
         dayPositionInTheWeek++
         if (dayPositionInTheWeek == 7) {
@@ -117,12 +124,19 @@ function GetDateOfSubject(){
 
     if (students_table.length-1 >=0) {
         if (dayPositionInTheWeek == 6 ) {
-            dayPositionInTheWeek = 1
             nextDay = nextDay + 2
+            dayPositionInTheWeek = 1
         }
-
+        if (nextDay > 31) {
+            nextDay = 1
+            nexMonth++
+        }
+        if (nexMonth > 12) {
+            nexMonth = 1
+            nextYear++
+        }  
        
-        let date = nextDay +'/' +d.getMonth() +'/'+d.getFullYear()
+        let date = nextDay +'/' + nexMonth +'/'+ nextYear
         console.log(date);
         console.log(dayPositionInTheWeek);
     }

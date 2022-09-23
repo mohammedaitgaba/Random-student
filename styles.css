@@ -1,7 +1,14 @@
 *{
     margin: 0;
 }
-.container{
+.title{
+
+    background-color: beige;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 20px;
+}
+.container_student_picker{
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -9,30 +16,74 @@
     padding: 10px;
     height: 97vh;
 }
+.students_list_section{
+    height: 70%;
+    width: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 10px;
+    /* align-items: center; */
+}
+.new_student{
+    display: flex;
+}
+.stud_list{
+    overflow: auto;
+    
+}
+.students_list_title{
+    text-align: center;
+}
 .generator{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+.generate_list_student button{
+    padding: 15px;
+    margin-bottom: 30px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    
+}
+
 .pick_lucky_student button{
-    padding: 25px;
+    padding:30px;
     margin-top: 30px;
     border-radius: 50%;
     border: none;
     background-color: rgb(0, 0, 0);
     color: white;
     font-size: 20px;
+    cursor: pointer;
     
 }
-.stud_list{
-    /* background-color: aqua;
-    color: blue; */
-    /* width: 40%; */
+.list_picked_students{
+    height: 70%;
+    width: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    border-radius: 10px;
+}
+#picked_students{
+
+    overflow: auto;
 }
 .students_list_shake{
     animation: shake 1s ;
-    background-color: rgb(247, 222, 222);
+    background-color: rgb(255, 255, 255);
+    overflow: auto;
 }
 @keyframes shake {
     0% {transform : translate(1px,1px) rotate(0deg);}
@@ -46,4 +97,9 @@
     80% {transform : translate(1px,1px) rotate(0deg);}
     90% {transform : translate(1px,1px) rotate(0deg);} */
     100% {transform : translate(1px,1px) rotate(0deg);}
+}
+@media only screen and (max-width: 767px) { 
+    .container_student_picker{
+        flex-direction: column;
+    }
 }
