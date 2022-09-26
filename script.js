@@ -3,108 +3,220 @@
 let addStudent = document.getElementById('add')
 let randomStudent = document.getElementById('Random_student')
 let students_table=[];
-let generated_list ;
+let generated_list;
+let generatedlist;
 let students_ordered = [];
+let subjects;
 let d= new Date();
+let subjectsIndex = -1
+let students_field = document.getElementById('students_list');
+
 
 
 let nextDay = d.getDate()
-let nexMonth = d.getMonth()
+let nexMonth = d.getMonth() + 1
 let nextYear =d.getFullYear()
+let date
+let dayoff
 
+console.log(nexMonth);
 let dayPositionInTheWeek = d.getDay()
-fetch("./students.json")
+
+
+fetch("http://localhost:3000/subjects")
 .then(response =>response.json())
-.then(data => generated_list =JSON.stringify(data))
+.then(data => subjects =JSON.stringify(data))
 
 d.getFullYear();	//Get the year as a four digit number (yyyy)
 d.getMonth();	    //Get the month as a number (0-11)
 d.getDate();	    //Get the day as a number (1-31)
 d.getDay();         //Get the weekday as a number (0-6)
 
+
 let today = d.toLocaleDateString()
 
-function generateDateOfSubject(){
-    localStorage.setItem('day', JSON.stringify(today));
+GetStudentsList()
+GetSubjects()
+function GetStudentsList() {
+    fetch("http://localhost:3000/students")
+    .then(response =>response.json())
+    .then(out =>  JSON.stringify(out))
+    .then(data => generatedlist = JSON.parse(data))
+    .then(lunch => this.generateStudentsList())
+}
+
+async function GetSubjects() {
+    await fetch("http://localhost:3000/subjects")
+    .then(response =>response.json())
+    .then(data =>  JSON.stringify(data)
+    // {
+        // if (data) {
+        //     console.log(data);
+        //     return data
+        // }
+        // else {
+        //     return console.log("there is no subjects");
+        // }
+        
+    // }
+    )
+     .then(out => subjects = JSON.parse(out))
     
+    for (const iterator of subjects) {
+        document.getElementById("modal-body").innerHTML += iterator.name +"<br>"+"<hr>"
+    }
 }
 
 function generateStudentsList(){
-
-
-    let generatedlist = JSON.parse(generated_list);
-    let students_field = document.getElementById('students_list');
+    // generatedlist = JSON.parse(generated_list);
+    console.log("generateStudentsList",generatedlist);
     students_table = []
     students_field.innerHTML = ""
     for (const iterator of generatedlist) {
-        students_table.push(iterator.name)
-        students_field.innerHTML += iterator.name +"</br>" +'<hr>' ;
+        // students_table.push(iterator.name)
+        students_field.innerHTML += '<div class= student_name_field>'+ iterator.name + '<button id="delete_student" onclick="deleteStudent('+iterator.id+')"> <img src="./icons/carbon_close-filled.png"/> </button>'+'</div>' +'<hr>' ;
     }
 }
-document.getElementById("add").addEventListener("click", function(event){
-    event.preventDefault()
-  });
+
+document.getElementById("add").addEventListener("click", function(event){event.preventDefault()});
+
+
+
 function addStudents(){
-    this.generateDateOfSubject()
+    // console.log( JSON.parse(subjects));
+    // this.generateDateOfSubject()
     // getting input value (student name)
-    let studentName = document.querySelector("input").value;
+    let studentName = document.getElementById("student_name").value;
     document.getElementById('student_name').value = "";
     // push elements to the array of students 
-    if (studentName) {
-        students_table.push(studentName)
-    }
-    // console.log("students",students_table);
+    // if (studentName) {
+    //     students_table.push(studentName)
+    // }
+    // // console.log("students",students_table);
     
-    //create feild to show elements inserted
-    let newstudent = ""
+    // //create feild to show elements inserted
+    // let newstudent = ""
     
-    let students_field = document.getElementById('students_list');
+    // let students_field = document.getElementById('students_list');
 
-    for (let i = 0; i < students_table.length; i++) {
-        // if (i == students_table.length) {
-        //     console.log('haha');
-        // }
-        newstudent = newstudent + students_table[i] + '</br>' +'<hr>'
+    // for (let i = 0; i < students_table.length; i++) {
+        
+    //     newstudent = newstudent + students_table[i] + '</br>' +'<hr>'
+    //     // let create_p = document.createElement('p')
+    //     // console.log(create_p);
+    //     // const node_student = document.createTextNode(students_table[i])
+    //     // create_p.appendChild(node_student)
+    //     // document.getElementById('students_list').append(create_p)
 
+    // }
+    // students_field.innerHTML = newstudent
+
+    let name = studentName 
+    // let data = { name };    
+    if (name) {
+        fetch("http://localhost:3000/students",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({name})
+        }).then(res=> res.json()).then(out=>console.log(out))
+        .then(lunch => this.GetStudentsList())
     }
-    students_field.innerHTML = newstudent
 }
 
 
 function pickStudent(){
+    
     this.GetDateOfSubject()
     this.ShakeAnimation()
-    let student_selected = students_table[Math.floor(Math.random() * students_table.length)];
-    // console.log(student_selected);
+    
+    let student_selected = generatedlist[Math.floor(Math.random() * generatedlist.length)];
+    let no_more_pick = generatedlist.length
+    
     setTimeout(() => {
         
-        let values = students_table.values()
-        
         // getting the random student and remove him from the list of students
-        for (const iterator of values) {
+        console.log(subjects);
+        for (const iterator of generatedlist) {
             if (student_selected === iterator) {
+                subjectsIndex++
+                console.log(subjectsIndex);
                 students_ordered.push(iterator)
                 // alert("lucky dude :"+iterator)
-                const removeStudent =  students_table.indexOf(iterator)
-                students_table.splice(removeStudent, 1);
-                console.log("students_table",students_table);
+                console.log("in picker",date);
+                const removeStudent =  generatedlist.indexOf(iterator)
+                console.log("removeStudent ",removeStudent);
+                generatedlist.splice(removeStudent, 1);
         
                 let student_create_p = document.createElement("p")
-                const node = document.createTextNode(iterator)
-                student_create_p.appendChild(node)
-                let picked_students = document.getElementById('picked_students')
-                picked_students.append(student_create_p)
+                const node_student = document.createTextNode(iterator.name)
+                student_create_p.appendChild(node_student)
+                document.getElementById('picked_students').append(student_create_p)
+
+
+                let date_create_p = document.createElement("p")
+                const node_date = document.createTextNode(date)
+                date_create_p.appendChild(node_date)
+                document.getElementById('picked_date').append(date_create_p)
                 
-                // console.log("students_ordered",students_ordered);
+                // this.deleteStudent(removeStudent)
+                
+            }
+            for (const iterator of subjects) {
+                
+                let subject_create_p = document.createElement("p")
+                const node_subject = document.createTextNode(iterator.name)
+                subject_create_p.appendChild(node_subject)
+                document.getElementById('picked_subject').append(subject_create_p)
             }
         }
-        
-        this.addStudents()
+        // in case there is no more students in students list
+        no_more_pick--
+        console.log("no_more_pick",no_more_pick);
+        if (no_more_pick == -1) {
+            document.getElementById("warning_message").innerHTML = "The list of students is empty"
+        }
+
+        students_field.innerHTML = ""
+        for (const iterator of generatedlist) {
+            // students_table.push(iterator.name)
+            students_field.innerHTML += iterator.name + ' <button id="delete_student" onclick="deleteStudent('+iterator.id+')"> <img src="./icons/carbon_close-filled.png"/> </button>' +"</br>" +'<hr>' ;
+        }
+        // this.addStudents()
         this.defaultview()
-    }, 1000);
+    }, 500);
 
 }
 
+function deleteStudent(id_student) {
+    fetch("http://localhost:3000/students/"+id_student,{
+        method: "DELETE",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ id:id_student })
+    }).then(res=>this.GetStudentsList())
+    .catch(e => console.error(e));
+}
+
+function addSubject() {
+    let subject_name = document.getElementById("subject_name").value;
+    document.getElementById('subject_name').value = "";
+    let name = subject_name
+    console.log(name);
+    if (name) {
+        fetch("http://localhost:3000/subjects",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({name})
+        })
+        .then(res=> res.json())
+        .then(lunch => this.GetSubjects())
+    }
+}
 function ShakeAnimation(){
     document.getElementsByTagName('div')[1].className = 'students_list_shake'
 }
@@ -114,7 +226,7 @@ function defaultview(){
 
 function GetDateOfSubject(){
     nextDay++
-    
+    // skip weekend
    if (dayPositionInTheWeek < 7) {
         dayPositionInTheWeek++
         if (dayPositionInTheWeek == 7) {
@@ -122,23 +234,38 @@ function GetDateOfSubject(){
         }
    }
 
-    if (students_table.length-1 >=0) {
+    if (generatedlist.length-1 >=0) {
         if (dayPositionInTheWeek == 6 ) {
+            dayoff = "dayoff"
             nextDay = nextDay + 2
             dayPositionInTheWeek = 1
         }
         if (nextDay > 31) {
-            nextDay = 1
+            if (dayoff) {
+                nextDay=3
+            }
+            else{
+                nextDay=1
+            }
             nexMonth++
         }
         if (nexMonth > 12) {
             nexMonth = 1
             nextYear++
-        }  
-       
-        let date = nextDay +'/' + nexMonth +'/'+ nextYear
-        console.log(date);
-        console.log(dayPositionInTheWeek);
+        }
+        // skip Public holidays in Morocco
+        if (((nextDay == 1 ||nextDay == 11) && nexMonth == 1)||
+            (nextDay == 1 && nexMonth == 5) ||
+            (nextDay == 30 && nexMonth == 7) ||
+            ((nextDay == 14 || nextDay == 20 || nextDay == 21) && nexMonth == 8)||
+            ((nextDay == 6 ||nextDay == 18) && nexMonth == 11)){
+                nextDay++
+                dayPositionInTheWeek++
+            }
+
+
+        dayoff=false
+        date = nextDay +'/' + nexMonth +'/'+ nextYear
     }
 
 

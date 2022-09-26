@@ -1,46 +1,66 @@
-[
+{
+  "students": [
     {
-        "id" : 1,
-        "name": "kamal Rhrabla"
+      "name": "mohammed",
+      "id": 1
     },
     {
-        "id" : 2,
-        "name": "abdelhak elaachari"
+      "name": "abdelhac",
+      "id": 2
     },
     {
-        "id" : 3,
-        "name": "Mohammed ait gaba"
+      "name": "brahim",
+      "id": 3
     },
     {
-        "id" : 4,
-        "name": "ayoub basidi"
-    },
-    {
-        "id" : 5,
-        "name": "jawad doufare"
-    },
-    {
-        "id" : 6,
-        "name": "reda daalabi"
-    },
-    {
-        "id" : 7,
-        "name": "youness nemli"
-    },
-    {
-        "id" : 8,
-        "name": "ayoub elgountari"
-    },
-    {
-        "id" : 9,
-        "name": "amine hatim"
-    },
-    {
-        "id" : 10,
-        "name": "abdellah atguiri"
-    },
-    {
-        "id" : 11,
-        "name": "Hala ziani"
+      "name": "chaimaa",
+      "id": 4
     }
-]
+  ],
+  "subjects": [
+    {
+      "id": 1,
+      "name": "scrum"
+    },
+    {
+      "id": 2,
+      "name": "xp"
+    },
+    {
+      "id": 3,
+      "name": "crystal"
+    },
+    {
+      "id": 4,
+      "name": "wow"
+    },
+    {
+      "id": 5,
+      "name": "test"
+    },
+    {
+      "id": 6,
+      "name": "devops"
+    },
+    {
+      "id": 7,
+      "name": "react native"
+    },
+    {
+      "id": 8,
+      "name": "electron js"
+    },
+    {
+      "id": 9,
+      "name": "agility"
+    },
+    {
+      "id": 10,
+      "name": "full"
+    },
+    {
+      "id": 11,
+      "name": "imposter syndrom"
+    }
+  ]
+}

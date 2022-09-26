@@ -31,6 +31,7 @@
 }
 .stud_list{
     overflow: auto;
+    padding: 10px 15px ;
     
 }
 .students_list_title{
@@ -42,16 +43,43 @@
     justify-content: center;
     align-items: center;
 }
-.generate_list_student button{
-    padding: 15px;
-    margin-bottom: 30px;
+#add{
+    margin-left: 1rem;
+    padding:5px 25px;
     border-radius: 20px;
     border: none;
     background-color: rgb(0, 0, 0);
     color: white;
     font-size: 16px;
     cursor: pointer;
+}
+.generate_list_student button{
+    padding: 15px;
+    margin-bottom: 30px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
     
+}
+#modal-body{
+    padding: 0 20px;
+    overflow: auto;
+    height: 50vh;
+}
+#add_subject{
+    padding: 10px;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 10px;
+}
+.student_name_field{
+    display: flex;
+    justify-content: space-between;
 }
 
 .pick_lucky_student button{
@@ -67,7 +95,7 @@
 }
 .list_picked_students{
     height: 70%;
-    width: 15rem;
+    width: 25rem;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -76,26 +104,41 @@
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     border-radius: 10px;
 }
-#picked_students{
 
-    overflow: auto;
-}
 .students_list_shake{
     animation: shake 1s ;
-    background-color: rgb(255, 255, 255);
     overflow: auto;
+}
+.generated_elements{
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    overflow: auto;
+
+}
+hr{
+    margin: 10px 5px !important;
+}
+#delete_student{
+    border: none;
+    background-color: beige;
+    
+}
+#warning_message{
+    margin-top: 10px;
+    color: red;
 }
 @keyframes shake {
     0% {transform : translate(1px,1px) rotate(0deg);}
-    10% {transform : translate(-1px,2px) rotate(-1deg);}
+    10% {transform : translate(-1px,2px) rotate(-5deg);}
     20% {transform : translate(-3px,0px) rotate(1deg);}
-    30% {transform : translate(1px,1px) rotate(0deg);}
+    30% {transform : translate(1px,1px) rotate(5deg);}
     40% {transform : translate(10px,1px) rotate(1deg);}
     50% {transform : translate(1px,1px) rotate(-1deg);}
-    /* 60% {transform : translate(1px,1px) rotate(0deg);}
-    70% {transform : translate(1px,1px) rotate(0deg);}
+    60% {transform : translate(1px,1px) rotate(0deg);}
+    70% {transform : translate(-1px,2px) rotate(-5deg);}
     80% {transform : translate(1px,1px) rotate(0deg);}
-    90% {transform : translate(1px,1px) rotate(0deg);} */
+    90% {transform : translate(1px,1px) rotate(5deg);}
     100% {transform : translate(1px,1px) rotate(0deg);}
 }
 @media only screen and (max-width: 767px) { 
