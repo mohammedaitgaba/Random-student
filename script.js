@@ -5,7 +5,6 @@ let randomStudent = document.getElementById('Random_student')
 let students_table=[];
 let generated_list;
 let generatedlist;
-let students_ordered = [];
 let subjects;
 let d= new Date();
 let subjectsIndex = -1
@@ -49,16 +48,6 @@ async function GetSubjects() {
     await fetch("http://localhost:3000/subjects")
     .then(response =>response.json())
     .then(data =>  JSON.stringify(data)
-    // {
-        // if (data) {
-        //     console.log(data);
-        //     return data
-        // }
-        // else {
-        //     return console.log("there is no subjects");
-        // }
-        
-    // }
     )
      .then(out => subjects = JSON.parse(out))
     
@@ -68,12 +57,10 @@ async function GetSubjects() {
 }
 
 function generateStudentsList(){
-    // generatedlist = JSON.parse(generated_list);
     console.log("generateStudentsList",generatedlist);
     students_table = []
     students_field.innerHTML = ""
     for (const iterator of generatedlist) {
-        // students_table.push(iterator.name)
         students_field.innerHTML += '<div class= student_name_field>'+ iterator.name + '<button id="delete_student" onclick="deleteStudent('+iterator.id+')"> <img src="./icons/carbon_close-filled.png"/> </button>'+'</div>' +'<hr>' ;
     }
 }
@@ -83,36 +70,9 @@ document.getElementById("add").addEventListener("click", function(event){event.p
 
 
 function addStudents(){
-    // console.log( JSON.parse(subjects));
-    // this.generateDateOfSubject()
-    // getting input value (student name)
     let studentName = document.getElementById("student_name").value;
     document.getElementById('student_name').value = "";
-    // push elements to the array of students 
-    // if (studentName) {
-    //     students_table.push(studentName)
-    // }
-    // // console.log("students",students_table);
-    
-    // //create feild to show elements inserted
-    // let newstudent = ""
-    
-    // let students_field = document.getElementById('students_list');
-
-    // for (let i = 0; i < students_table.length; i++) {
-        
-    //     newstudent = newstudent + students_table[i] + '</br>' +'<hr>'
-    //     // let create_p = document.createElement('p')
-    //     // console.log(create_p);
-    //     // const node_student = document.createTextNode(students_table[i])
-    //     // create_p.appendChild(node_student)
-    //     // document.getElementById('students_list').append(create_p)
-
-    // }
-    // students_field.innerHTML = newstudent
-
     let name = studentName 
-    // let data = { name };    
     if (name) {
         fetch("http://localhost:3000/students",{
             method: "POST",
@@ -141,13 +101,7 @@ function pickStudent(){
         for (const iterator of generatedlist) {
             if (student_selected === iterator) {
                 subjectsIndex++
-                console.log(subjectsIndex);
-                students_ordered.push(iterator)
-                // alert("lucky dude :"+iterator)
-                console.log("in picker",date);
-                const removeStudent =  generatedlist.indexOf(iterator)
-                console.log("removeStudent ",removeStudent);
-                generatedlist.splice(removeStudent, 1);
+                this.deleteStudent(iterator.id)
         
                 let student_create_p = document.createElement("p")
                 const node_student = document.createTextNode(iterator.name)
@@ -159,17 +113,16 @@ function pickStudent(){
                 const node_date = document.createTextNode(date)
                 date_create_p.appendChild(node_date)
                 document.getElementById('picked_date').append(date_create_p)
-                
-                // this.deleteStudent(removeStudent)
-                
-            }
-            for (const iterator of subjects) {
-                
+                                
                 let subject_create_p = document.createElement("p")
-                const node_subject = document.createTextNode(iterator.name)
+                const node_subject = document.createTextNode(subjects[subjectsIndex].name)
                 subject_create_p.appendChild(node_subject)
                 document.getElementById('picked_subject').append(subject_create_p)
+
+                
             }
+
+
         }
         // in case there is no more students in students list
         no_more_pick--

@@ -1,22 +1,5 @@
 {
-  "students": [
-    {
-      "name": "mohammed",
-      "id": 1
-    },
-    {
-      "name": "abdelhac",
-      "id": 2
-    },
-    {
-      "name": "brahim",
-      "id": 3
-    },
-    {
-      "name": "chaimaa",
-      "id": 4
-    }
-  ],
+  "students": [],
   "subjects": [
     {
       "id": 1,
