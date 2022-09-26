@@ -9,6 +9,7 @@ let subjects;
 let d= new Date();
 let subjectsIndex = -1
 let students_field = document.getElementById('students_list');
+let student_selected;
 
 
 
@@ -50,9 +51,9 @@ async function GetSubjects() {
     .then(data =>  JSON.stringify(data)
     )
      .then(out => subjects = JSON.parse(out))
-    
+     document.getElementById("modal-body").innerHTML=""
     for (const iterator of subjects) {
-        document.getElementById("modal-body").innerHTML += iterator.name +"<br>"+"<hr>"
+        document.getElementById("modal-body").innerHTML += '<div class= student_name_field>'+ iterator.name + '<button id="delete_subject" onclick="deleteSubject('+iterator.id+')"> <img src="./icons/carbon_close-filled.png"/> </button>'+'</div>' +'<hr>' ;
     }
 }
 
@@ -84,14 +85,24 @@ function addStudents(){
         .then(lunch => this.GetStudentsList())
     }
 }
-
+// function ok() {
+   
+// }
 
 function pickStudent(){
     
     this.GetDateOfSubject()
     this.ShakeAnimation()
-    
-    let student_selected = generatedlist[Math.floor(Math.random() * generatedlist.length)];
+    student_selected = generatedlist[Math.floor(Math.random() * generatedlist.length)];
+
+    // for (let i = 0; i < 20000; i++){
+        
+    //     console.log(student_selected.name);
+    // }
+    if (student_selected) {
+        
+        document.getElementById("spining_names").innerHTML = student_selected.name
+    }
     let no_more_pick = generatedlist.length
     
     setTimeout(() => {
@@ -113,7 +124,8 @@ function pickStudent(){
                 const node_date = document.createTextNode(date)
                 date_create_p.appendChild(node_date)
                 document.getElementById('picked_date').append(date_create_p)
-                                
+                
+                
                 let subject_create_p = document.createElement("p")
                 const node_subject = document.createTextNode(subjects[subjectsIndex].name)
                 subject_create_p.appendChild(node_subject)
@@ -150,6 +162,16 @@ function deleteStudent(id_student) {
         },
         body: JSON.stringify({ id:id_student })
     }).then(res=>this.GetStudentsList())
+    .catch(e => console.error(e));
+}
+function deleteSubject(id_subject) {
+    fetch("http://localhost:3000/subjects/"+id_subject,{
+        method: "DELETE",
+        headers: {
+        "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ id:id_subject })
+    }).then(res=>this.GetSubjects())
     .catch(e => console.error(e));
 }
 

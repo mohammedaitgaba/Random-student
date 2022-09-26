@@ -37,6 +37,11 @@
 .students_list_title{
     text-align: center;
 }
+#students_list{
+    padding: 0 20px;
+    overflow: auto;
+    height: 50vh;
+}
 .generator{
     display: flex;
     flex-direction: column;
@@ -82,6 +87,17 @@
     justify-content: space-between;
 }
 
+.pick_lucky_student{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.spinner{
+    background-color: aqua;
+    padding: 15px 40px;
+    border-radius: 10px;
+}
 .pick_lucky_student button{
     padding:30px;
     margin-top: 30px;
@@ -119,14 +135,20 @@
 hr{
     margin: 10px 5px !important;
 }
-#delete_student{
+#delete_student ,#delete_subject{
     border: none;
     background-color: beige;
-    
+    border-radius: 100%;
+    padding: 0;
 }
 #warning_message{
     margin-top: 10px;
     color: red;
+}
+.btn ,.btn-dark{
+    padding: 5px 15px !important;
+    margin: 10px 0 ;
+    width: 9rem;
 }
 @keyframes shake {
     0% {transform : translate(1px,1px) rotate(0deg);}

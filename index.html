@@ -16,42 +16,61 @@
     </section>
     <section class="container_student_picker">
         <!-- <button onclick="tored()">to red</button> -->
-        <section class="students_list_section">
-            <div class="students_list_title">
-                <h3>students list</h2>
-            </div>
-            <div class="stud_list">
-                <span id="students_list" >
-                    
-                </span>
-            </div>
-        </section>
+       
 
         <section class="generator">
             <!-- <div class="generate_list_student">
                 <button onclick="generateStudentsList()">generate ready list</button>
             </div> -->
-
-            <form class="form-floating mb-3 new_student">
-                <!-- <label for="">Student Name</label> -->
-                <!-- <input type="text" id="student_name"> -->
-                <input type="text" class="form-control" id="student_name" placeholder="name@example.com" >
-                <label for="student_name">Student Name</label>
-                <button id="add" onclick="addStudents()">New student</button>
-            </form> 
-
-            <div class="pick_lucky_student">
-                <button id="Random_student" onclick="pickStudent()">Pick</button>
-            </div>
-            <div id="warning_message">
-            </div>
-            
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                objects list
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#subjectModal">
+                Students list
+            </button>
+
+            <div class="modal fade" id="subjectModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    
+                    <form class="form-floating m-3 new_student">
+                            <input type="text" class="form-control" id="student_name" placeholder="name@example.com" >
+                            <label for="student_name">Student Name</label>
+                            <button id="add" onclick="addStudents()">New student</button>
+                    </form>
+
+                    <!-- <section class="students_list_section">
+                        <div class="students_list_title">
+                            <h3>students list</h2>
+                        </div>
+                        <div class="stud_list">
+
+                        </div>
+                    </section> -->
+                    <div id="students_list">
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+  
+            
+
+         
+            
+            
+            <!-- this button will show the list of subjects -->
+
+
+            <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Subjects list
             </button>
             
-            <!-- Modal -->
+            
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
@@ -61,8 +80,6 @@
                     </div>
                     <div>
                         <form class="form-floating m-3 new_student">
-                            <!-- <label for="">Student Name</label> -->
-                            <!-- <input type="text" id="student_name"> -->
                             <input type="text" class="form-control " id="subject_name" placeholder="IT" >
                             <label for="student_name">Subject Name</label>
                             <button id="add_subject" type="button" onclick="addSubject()">Add</button>
@@ -80,7 +97,19 @@
   
         
         </section>
-        
+
+        <div class="pick_lucky_student">
+            <div class="spinner">
+                <!-- <h3>The lucky dude is :</h3> -->
+                <div id="spining_names">
+                    
+                </div>
+            </div>
+            <button id="Random_student" onclick="pickStudent()">Pick</button>
+            <div id="warning_message">
+            </div>
+            
+        </div>
         
     
         <section class="list_picked_students">
