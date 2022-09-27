@@ -3,13 +3,15 @@
 let addStudent = document.getElementById('add')
 let randomStudent = document.getElementById('Random_student')
 let students_table=[];
-let generated_list;
 let generatedlist;
 let subjects;
 let d= new Date();
 let subjectsIndex = -1
 let students_field = document.getElementById('students_list');
 let student_selected;
+let holidays_date;
+let holiday_days;
+let holiday_mounth;
 
 
 
@@ -37,6 +39,7 @@ let today = d.toLocaleDateString()
 
 GetStudentsList()
 GetSubjects()
+getholydays()
 function GetStudentsList() {
     fetch("http://localhost:3000/students")
     .then(response =>response.json())
@@ -59,7 +62,7 @@ async function GetSubjects() {
 
 function generateStudentsList(){
     console.log("generateStudentsList",generatedlist);
-    students_table = []
+    // students_table = []
     students_field.innerHTML = ""
     for (const iterator of generatedlist) {
         students_field.innerHTML += '<div class= student_name_field>'+ iterator.name + '<button id="delete_student" onclick="deleteStudent('+iterator.id+')"> <img src="./icons/carbon_close-filled.png"/> </button>'+'</div>' +'<hr>' ;
@@ -245,6 +248,28 @@ function GetDateOfSubject(){
 
 
     
+}
+
+
+async function getholydays(){
+    const options = {
+        method: 'GET',
+        headers: {
+            'X-RapidAPI-Key': '90cf9019d0msh7ca3721b4139f50p1c9902jsn1d9d6a9cd718',
+            'X-RapidAPI-Host': 'public-holiday.p.rapidapi.com'
+        }
+    };
+    await fetch('https://public-holiday.p.rapidapi.com/2022/MA', options)
+        .then(response => response.json())
+        .then(out=>JSON.stringify(out))
+        .then(response => holidays_date = JSON.parse(response))
+        .catch(err => console.error(err));
+        holidays_date.forEach(element => {
+            console.log("holidays",element.date);
+            
+            
+        });
+        // console.log("holidays",holidays);
 }
 
 // randomStudent.addEventListener('click',function(){
