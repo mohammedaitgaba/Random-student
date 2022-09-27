@@ -74,18 +74,23 @@ document.getElementById("add").addEventListener("click", function(event){event.p
 
 
 function addStudents(){
-    let studentName = document.getElementById("student_name").value;
-    document.getElementById('student_name').value = "";
-    let name = studentName 
-    if (name) {
-        fetch("http://localhost:3000/students",{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({name})
-        }).then(res=> res.json()).then(out=>console.log(out))
-        .then(lunch => this.GetStudentsList())
+    if (generatedlist.length > subjects.length -1) {
+        document.getElementById("students_more_then_subjects").innerHTML = "Students can't be more then subjects go add some subjects in this case"
+    }else{
+
+        let studentName = document.getElementById("student_name").value;
+        document.getElementById('student_name').value = "";
+        let name = studentName 
+        if (name) {
+            fetch("http://localhost:3000/students",{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({name})
+            }).then(res=> res.json()).then(out=>console.log(out))
+            .then(lunch => this.GetStudentsList())
+        }
     }
 }
 // function ok() {
