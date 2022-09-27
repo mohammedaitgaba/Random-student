@@ -12,6 +12,7 @@ let student_selected;
 let holidays_date;
 let holiday_days;
 let holiday_mounth;
+let generated_rapport=[];
 
 
 
@@ -21,7 +22,6 @@ let nextYear =d.getFullYear()
 let date
 let dayoff
 
-console.log(nexMonth);
 let dayPositionInTheWeek = d.getDay()
 
 
@@ -140,10 +140,19 @@ function pickStudent(){
 
         }
         // in case there is no more students in students list
-        no_more_pick--
-        console.log("no_more_pick",no_more_pick);
-        if (no_more_pick == -1) {
-            document.getElementById("warning_message").innerHTML = "The list of students is empty"
+        // if (no_more_pick == generatedlist.length) {
+            //     document.getElementById("rapport_submit").innerHTML =""
+            // }else{
+                // }
+                
+                
+                no_more_pick--
+                console.log("no_more_pick",no_more_pick);
+                if (no_more_pick == -1) {
+                    document.getElementById("warning_message").innerHTML = "The list of students is empty"
+                }else{
+                    
+                    document.getElementById("rapport_submit").innerHTML = '<button onclick="exportTableToExcel()" id="download_rapport" class="btn btn-dark"> download list</button> '
         }
 
         students_field.innerHTML = ""
@@ -270,6 +279,32 @@ async function getholydays(){
             
         });
         // console.log("holidays",holidays);
+}
+
+/**
+ * The exportTableToExcel() function convert HTML table data to excel and download as XLS file (.xls).
+ 
+ */
+ function exportTableToExcel() {
+    let filename = "excel_data.xls"
+    var downloadLink;
+    var dataType = "application/vnd.ms-excel";
+    var tableSelect = document.getElementById("table_raport");
+    var tableHTML = tableSelect.outerHTML.replace(/ /g, "%20");
+  
+    // Create download link element
+    downloadLink = document.createElement("a");
+  
+    document.body.appendChild(downloadLink);
+  
+    // Create a link to the file
+    downloadLink.href = "data:" + dataType + ", " + tableHTML;
+
+    // Setting the file name
+    downloadLink.download = filename;
+
+    //triggering the function
+    downloadLink.click();
 }
 
 // randomStudent.addEventListener('click',function(){
